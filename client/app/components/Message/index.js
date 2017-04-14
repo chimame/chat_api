@@ -2,7 +2,11 @@ import React, { PropTypes } from 'react'
 
 const Message = ({actions, id, text, onClick}) => {
   const handleDelete = () => {
-    actions.deleteMessage(id)
+    $.ajax({
+      type: 'DELETE',
+      url: `/api/messages/${id}`,
+      success: (() => actions.deleteMessage(id))
+    })
   }
 
   return (
