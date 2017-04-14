@@ -2,7 +2,8 @@ import { combineReducers } from 'redux'
 import {
   ADD_MESSAGE,
   CREATE_MESSAGE_LIST,
-  TOGGLE_DISPLAY_MESSAGE
+  TOGGLE_DISPLAY_MESSAGE,
+  UPDATE_MESSAGE
 } from '../constants/chat'
 
 export const chatInitialState = [{"id":2,"text":"message2"},{"id":1,"text":"message1"}]
@@ -12,6 +13,14 @@ const toggleMessage = (id, message) => {
     message.displayState = !message.displayState
   }
   return message
+}
+
+const updateMessage = (oldMessage, newMessage) => {
+  if (oldMessage.id === newMessage.id) {
+    newMessage['displayState'] = true
+    return newMessage
+  }
+  return oldMessage
 }
 
 const chat = (state = '', action) => {
@@ -27,6 +36,8 @@ const chat = (state = '', action) => {
       return [ ...state, message ]
     case TOGGLE_DISPLAY_MESSAGE:
       return state.map((message) => toggleMessage(action.id, message))
+    case UPDATE_MESSAGE:
+      return state.map((message) => updateMessage(message, action.message))
     default:
       return state
   }
