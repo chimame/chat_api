@@ -16,8 +16,14 @@ class MessageForm extends Component {
 
   onUpdate() {
     const { actions, message } = this.props
-    message.text = this.textMessage.value
-    actions.updateMessage(message)
+    $.ajax({
+      type: 'PATCH',
+      url: `/api/messages/${message.id}`,
+      data: {
+        message: {text: this.textMessage.value}
+      },
+      success: ((data) => actions.updateMessage(data))
+    })
   }
 
   render() {
