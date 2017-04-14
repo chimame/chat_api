@@ -3,7 +3,8 @@ import {
   ADD_MESSAGE,
   CREATE_MESSAGE_LIST,
   TOGGLE_DISPLAY_MESSAGE,
-  UPDATE_MESSAGE
+  UPDATE_MESSAGE,
+  DELETE_MESSAGE
 } from '../constants/chat'
 
 export const chatInitialState = [{"id":2,"text":"message2"},{"id":1,"text":"message1"}]
@@ -38,6 +39,8 @@ const chat = (state = '', action) => {
       return state.map((message) => toggleMessage(action.id, message))
     case UPDATE_MESSAGE:
       return state.map((message) => updateMessage(message, action.message))
+    case DELETE_MESSAGE:
+      return state.filter((message) => message.id !== action.id)
     default:
       return state
   }
