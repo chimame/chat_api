@@ -1,7 +1,8 @@
 import {
   ADD_MESSAGE,
   CREATE_MESSAGE_LIST,
-  TOGGLE_DISPLAY_MESSAGE
+  TOGGLE_DISPLAY_MESSAGE,
+  UPDATE_MESSAGE
 } from '../constants/chat'
 
 export const addMessage = (message) => ({
@@ -17,4 +18,9 @@ export const createMessageList = (messages) => ({
 export const toggleDisplayMessage = (id) => ({
   type: TOGGLE_DISPLAY_MESSAGE,
   id,
+})
+
+export const updateMessage = (message) => ({
+  type: UPDATE_MESSAGE,
+  message,
 })
